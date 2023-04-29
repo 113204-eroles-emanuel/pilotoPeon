@@ -36,7 +36,7 @@ public class TableroController {
     @FXML
     public Button btnc3;
     Tablero tablero;
-    int turno = 0;
+
     boolean segundoTouch = false;
     int[] posicionVieja;
     List<int[]> movimientosPosibles;
@@ -56,27 +56,18 @@ public class TableroController {
         TableroDao dao = new TableroDao();
         dao.guardar(tablero.getEscaques());
     }
-    private void cambiarTurno(){
-        if(turno == 2){
-            turno = 3;
-        } else {
-            turno = 2;
-        }
-    }
+
     Peon peon = new Peon();
     private void movimiento(int[] posicionBoton) {
-        int contenidoEscaque = tablero.getContenidoEscaque(posicionBoton); // no
+
         if (!segundoTouch && contenidoEscaque / 10 == turno) {
-            movimientosPosibles = peon.movPosibles(this.tablero, posicionBoton); // no
+
             cambiarImagen(posicionBoton, segundoTouch); // si
-            posicionVieja = posicionBoton; // no
-            segundoTouch = true; // no
+
         } else if (segundoTouch && contenidoEscaque >= 100) {
-            tablero.borrarPosibles(movimientosPosibles); // no
+
             cambiarImagen(posicionBoton, segundoTouch); // si
-            tablero.movimiento(posicionVieja, posicionBoton); // no
-            segundoTouch = false; // no
-            cambiarTurno(); // no
+
         }
     }
 
